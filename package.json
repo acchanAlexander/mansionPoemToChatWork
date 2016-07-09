@@ -1,0 +1,22 @@
+{
+  "name": "mansion_poem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acchanAlexander/mansionPoemToChatWork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acchanAlexander/mansionPoemToChatWork/issues"
+  },
+  "homepage": "https://github.com/acchanAlexander/mansionPoemToChatWork#readme",
+  "dependencies": {
+    "redis": "^2.6.2"
+  }
+}
