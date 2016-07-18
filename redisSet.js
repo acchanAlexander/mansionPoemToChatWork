@@ -5,34 +5,21 @@ const client = require('redis').createClient()
     , parseResult = new CSV(data, { header: true }).parse()
     ;
 
-console.log(parseResult);
-
-let dbsize
+let cnt = 0
   ;
 
-getDBSize();
-
-/*
-var key = '2';
-var value = '{"hoge":"moge","foo":"var"}';
-*/
-
-function getDBSize() {
-  client.keys('*', function (err, keys) {
-    if (err) return console.log(err);
-    
-    dbsize = keys.length;
-    hoge();
-  });
-
-}
-
-function hoge() {
-  console.log(dbsize);
-}
-
-/*
-client.set(key, value, function(){
-  console.log('set end');
+parseResult.forEach((poemInfoRow) => {
+  set(cnt, poemInfoRow);
+  cnt++;
 });
-*/
+
+function set(key, val) {
+  client.set(key, JSON.stringify(val), (err, reply) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log(val.name + ' を' + key + ' に登録しました');
+  });
+}
