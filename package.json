@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/acchanAlexander/mansionPoemToChatWork#readme",
   "dependencies": {
+    "comma-separated-values": "^3.6.4",
     "redis": "^2.6.2"
   }
 }
