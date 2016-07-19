@@ -12,6 +12,12 @@ exec(fetchChatworkMessagesCmd,
       return;
     }
 
+    if (stdout === '') {
+      console.log('message is empty');
+      writeLog(__dirname + 'err.log', 'message is empty');
+      return;
+    }
+
     writeLog('stdout.log', stdout);
     writeLog('stderr.log', stderr);
 
