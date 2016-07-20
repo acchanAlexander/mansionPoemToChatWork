@@ -9,7 +9,7 @@ const mansionPoem = {
         return;
       }
 
-      callback(val);
+      callback(JSON.parse(val));
     });
   }
 }
