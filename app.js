@@ -32,8 +32,6 @@ exec(fetchChatworkMessagesCmd,
       postChatWork(poemInfo);
     });
 
-    // debug
-    return;
   }
 );
 
