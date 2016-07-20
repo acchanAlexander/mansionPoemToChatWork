@@ -28,15 +28,12 @@ exec(fetchChatworkMessagesCmd,
       return;
     }
 
-    getMansionPoem((data) => {
-      console.log('debug');
-      console.log(data);
+    getMansionPoem((poemInfo) => {
+      postChatWork(poemInfo);
     });
 
     // debug
     return;
-
-    postChatWork(mansionPoem);
   }
 );
 
@@ -58,14 +55,14 @@ function hasMansionPoemCmd(messages) {
 
 // return string
 function getMansionPoem(callback) {
-  mansionPoem.get(2, (data) => {
+  mansionPoem.get(3, (data) => {
     callback(data);
   });
 }
 
 // todo edit
-function postChatWork(imageLink) {
-  const msg = ''
+function postChatWork(poemInfo) {
+  const msg = '[info][title]'+ poemInfo.name + '\n' + poemInfo.url + '[/title]' + poemInfo.poem + '[/info]'
       , cmdPostChatWork = 'curl -X POST -H "X-ChatWorkToken: ' + process.env.CHATWORK_TOKEN + '" -d "body=' + msg + '" "https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages"'
       ;
 
