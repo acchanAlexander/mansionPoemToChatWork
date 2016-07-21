@@ -28,8 +28,10 @@ exec(fetchChatworkMessagesCmd,
       return;
     }
 
-    getMansionPoem((poemInfo) => {
-      postChatWork(poemInfo);
+    mansionPoem.randKey((key) => {
+      getMansionPoem(key, (poemInfo) => {
+        postChatWork(poemInfo);
+      });
     });
 
   }
@@ -52,8 +54,8 @@ function hasMansionPoemCmd(messages) {
 }
 
 // return string
-function getMansionPoem(callback) {
-  mansionPoem.get(3, (data) => {
+function getMansionPoem(key, callback) {
+  mansionPoem.get(key, (data) => {
     callback(data);
   });
 }
