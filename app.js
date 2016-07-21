@@ -62,7 +62,7 @@ function getMansionPoem(key, callback) {
 
 // todo edit
 function postChatWork(poemInfo) {
-  const msg = '[info][title]'+ poemInfo.name + '\n' + poemInfo.url + '[/title]' + poemInfo.poem + '[/info]'
+  const msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
       , cmdPostChatWork = 'curl -X POST -H "X-ChatWorkToken: ' + process.env.CHATWORK_TOKEN + '" -d "body=' + msg + '" "https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages"'
       ;
 
