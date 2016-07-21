@@ -12,11 +12,11 @@ const mansionPoem = {
       callback(JSON.parse(val));
     });
   },
-  count: function (callback) {
-    client.keys('*', function (err, keys) {
+  randKey: function (callback) {
+    client.randomkey((err, key) => {
       if (err) return console.log(err);
 
-      callback(keys.length);
+      callback(key);
     });
   },
 }
