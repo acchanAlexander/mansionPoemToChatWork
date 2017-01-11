@@ -62,21 +62,30 @@ function getMansionPoem(key, callback) {
 
 // todo edit
 function postChatWork(poemInfo) {
-  const msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
-      , cmdPostChatWork = 'curl -X POST -H "X-ChatWorkToken: ' + process.env.CHATWORK_TOKEN + '" -d "body=' + msg + '" "https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages"'
+  const request = require('request')
+      , msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
       ;
 
-  exec(cmdPostChatWork,
-    function (err, stdout, stderr) {
-      if (err){
-        writeLog('err.log', err);
-        return;
-      }
+  const headers = {
+          'X-ChatWorkToken': process.env.CHATWORK_TOKEN
+        }
 
-      writeLog('stdout.log', stdout);
-      writeLog('stderr.log', stderr);
+  const options = {
+    uri: 'https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages',
+    form: {
+      body: msg
+    },
+    headers: headers,
+    json: true
+  };
+
+  request.post(options, function(error, response, body){
+    if (!error && response.statusCode == 200) {
+      console.log(body);
+    } else {
+      console.log('error: '+ response.statusCode);
     }
-  );
+  });
 };
 
 function writeLog(filename, data) {
