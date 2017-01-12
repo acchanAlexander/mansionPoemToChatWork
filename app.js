@@ -4,7 +4,7 @@ const exec = require('child_process').exec
     , mansionPoem = require('./mansionPoem')
     , fetchChatworkMessagesCmd = 'curl -X GET -H "X-ChatWorkToken: ' + process.env.CHATWORK_TOKEN + '" "https://api.chatwork.com/v1/rooms/' +  process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages"'
     ;
-
+/*
 exec(fetchChatworkMessagesCmd,
   (err, stdout, stderr) => {
     if (err) {
@@ -36,6 +36,27 @@ exec(fetchChatworkMessagesCmd,
 
   }
 );
+*/
+
+const request = require('request');
+
+const headers = {
+        'X-ChatWorkToken': process.env.CHATWORK_TOKEN
+      }
+
+const options = {
+  uri: 'https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages',
+  headers: headers,
+  json: true
+};
+
+request.get(options, function(error, response, body){
+  if (!error && response.statusCode == 200) {
+    console.log(body);
+  } else {
+    console.log('error: '+ response.statusCode);
+  }
+});
 
 // return bool
 function hasMansionPoemCmd(messages) {
