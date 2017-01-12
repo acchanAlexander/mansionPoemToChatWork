@@ -50,13 +50,25 @@ const options = {
   json: true
 };
 
-request.get(options, function(error, response, body){
+request.get(options, function(error, response, messages){
   if (!error && response.statusCode == 200) {
-    console.log(body);
+    successedGetMessage(messages);
   } else {
     console.log('error: '+ response.statusCode);
   }
 });
+
+function successedGetMessage(messages) {
+  if (!hasMansionPoemCmd(messages)) {
+    return;
+  }
+
+  mansionPoem.randKey((key) => {
+    getMansionPoem(key, (poemInfo) => {
+      postChatWork(poemInfo);
+    });
+  });
+}
 
 // return bool
 function hasMansionPoemCmd(messages) {
