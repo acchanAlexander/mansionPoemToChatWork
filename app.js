@@ -1,27 +1,16 @@
 'use strict'
 const fs = require('fs')
     , mansionPoem = require('./mansionPoem')
+    , chatwork = require('./chatwork/chatwork')
     ;
 
-const request = require('request');
-
-const headers = {
-        'X-ChatWorkToken': process.env.CHATWORK_TOKEN
-      }
-
-const options = {
-  uri: 'https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages',
-  headers: headers,
-  json: true
-};
-
-request.get(options, function(error, response, messages){
-  if (!error && response.statusCode == 200) {
-    successedGetMessage(messages);
-  } else {
-    console.log('error: '+ response.statusCode);
-  }
+chatwork.init({
+  chatworkToken: process.env.CHATWORK_TOKEN,
+  roomId: process.env.CHATWORK_MANSION_POEM_ROOM_ID,
+  msg: Date()
 });
+
+chatwork.getRoomMessages(successedGetMessage);
 
 function successedGetMessage(messages) {
   if (!hasMansionPoemCmd(messages)) {
