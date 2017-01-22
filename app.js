@@ -18,15 +18,7 @@ function successedGetMessage(messages) {
     return;
   }
 
-  mansionPoem.randKey((key) => {
-    getMansionPoem(key, (poemInfo) => {
-      let msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]';
-      chatworkParams.msg = msg;
-      chatwork.init(chatworkParams);
-
-      chatwork.postRoomMessages();
-    });
-  });
+  execPostPoem();
 }
 
 // return bool
@@ -40,6 +32,18 @@ function hasMansionPoemCmd(messages) {
   });
 
   return false;
+}
+
+function execPostPoem() {
+  mansionPoem.randKey((key) => {
+    getMansionPoem(key, (poemInfo) => {
+      let msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]';
+      chatworkParams.msg = msg;
+      chatwork.init(chatworkParams);
+
+      chatwork.postRoomMessages();
+    });
+  });
 }
 
 // return string
