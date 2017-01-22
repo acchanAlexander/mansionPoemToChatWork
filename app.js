@@ -31,8 +31,7 @@ function successedGetMessage(messages) {
 
 // return bool
 function hasMansionPoemCmd(messages) {
-  const MANSION_POEM_CMD = 'mansion poem'
-      ;
+  const MANSION_POEM_CMD = 'mansion poem';
 
   messages.forEach((message) => {
     if (message.body === MANSION_POEM_CMD) {
