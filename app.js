@@ -4,11 +4,12 @@ const fs = require('fs')
     , chatwork = require('./chatwork/chatwork')
     ;
 
-chatwork.init({
-  chatworkToken: process.env.CHATWORK_TOKEN,
-  roomId: process.env.CHATWORK_MANSION_POEM_ROOM_ID,
-  msg: Date()
-});
+let chatworkParams = {
+      chatworkToken: process.env.CHATWORK_TOKEN,
+      roomId: process.env.CHATWORK_MANSION_POEM_ROOM_ID,
+    };
+
+chatwork.init(chatworkParams);
 
 chatwork.getRoomMessages(successedGetMessage);
 
@@ -19,11 +20,9 @@ function successedGetMessage(messages) {
 
   mansionPoem.randKey((key) => {
     getMansionPoem(key, (poemInfo) => {
-      chatwork.init({
-        chatworkToken: process.env.CHATWORK_TOKEN,
-        roomId: process.env.CHATWORK_MANSION_POEM_ROOM_ID,
-        msg: '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
-      });
+      let msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]';
+      chatworkParams.msg = msg;
+      chatwork.init(chatworkParams);
 
       chatwork.postRoomMessages();
     });
