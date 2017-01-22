@@ -19,7 +19,13 @@ function successedGetMessage(messages) {
 
   mansionPoem.randKey((key) => {
     getMansionPoem(key, (poemInfo) => {
-      postChatWork(poemInfo);
+      chatwork.init({
+        chatworkToken: process.env.CHATWORK_TOKEN,
+        roomId: process.env.CHATWORK_MANSION_POEM_ROOM_ID,
+        msg: '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
+      });
+
+      chatwork.postRoomMessages();
     });
   });
 }
@@ -46,34 +52,6 @@ function getMansionPoem(key, callback) {
     callback(data);
   });
 }
-
-// todo edit
-function postChatWork(poemInfo) {
-  const request = require('request')
-      , msg = '[info][title]'+ poemInfo.name + '[/title]' + poemInfo.poem + '\n' + poemInfo.url + '[/info]'
-      ;
-
-  const headers = {
-          'X-ChatWorkToken': process.env.CHATWORK_TOKEN
-        }
-
-  const options = {
-    uri: 'https://api.chatwork.com/v1/rooms/' + process.env.CHATWORK_MANSION_POEM_ROOM_ID + '/messages',
-    form: {
-      body: msg
-    },
-    headers: headers,
-    json: true
-  };
-
-  request.post(options, function(error, response, body){
-    if (!error && response.statusCode == 200) {
-      console.log(body);
-    } else {
-      console.log('error: '+ response.statusCode);
-    }
-  });
-};
 
 function writeLog(filename, data) {
   fs.writeFile(filename, data, (err) => {
