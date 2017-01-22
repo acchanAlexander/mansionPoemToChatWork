@@ -24,14 +24,15 @@ function successedGetMessage(messages) {
 // return bool
 function hasMansionPoemCmd(messages) {
   const MANSION_POEM_CMD = 'mansion poem';
+  let ret = false;
 
   messages.forEach((message) => {
     if (message.body === MANSION_POEM_CMD) {
-      return true;
+      ret = true;
     }
   });
 
-  return false;
+  return ret;
 }
 
 function execPostPoem() {
