@@ -35,7 +35,7 @@ function hasMansionPoemCmd(messages) {
 
   messages.forEach((message) => {
     if (message.body === MANSION_POEM_CMD) {
-      return = true;
+      return true;
     }
   });
 
