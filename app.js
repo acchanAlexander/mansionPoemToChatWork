@@ -11,7 +11,9 @@ let chatworkParams = {
 
 chatwork.init(chatworkParams);
 
-chatwork.getRoomMessages(successedGetMessage);
+setInterval(() => {
+  chatwork.getRoomMessages(successedGetMessage);
+}, 2000);
 
 function successedGetMessage(messages) {
   if (!hasMansionPoemCmd(messages)) {
