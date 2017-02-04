@@ -1,7 +1,7 @@
 'use strict'
 const fs = require('fs')
     , mansionPoem = require('./mansionPoem')
-    , chatwork = require('./chatwork/chatwork')
+    , chatwork = require('chatwork-api-v2')
     ;
 
 let chatworkParams = {
