@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/acchanAlexander/mansionPoemToChatWork#readme",
   "dependencies": {
-    "chatwork-api-v2": "^1.0.1",
+    "chatwork-client": "^1.0.11",
     "comma-separated-values": "^3.6.4",
     "redis": "^2.6.2",
     "request": "^2.79.0"

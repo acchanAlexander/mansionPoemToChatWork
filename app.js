@@ -1,7 +1,7 @@
 'use strict'
 const fs = require('fs')
     , mansionPoem = require('./mansionPoem')
-    , chatwork = require('chatwork-api-v2')
+    , chatwork = require('chatwork-client')
     ;
 
 let chatworkParams = {
@@ -12,8 +12,11 @@ let chatworkParams = {
 chatwork.init(chatworkParams);
 
 setInterval(() => {
-  chatwork.getRoomMessages(successedGetMessage);
-}, 2000);
+  chatwork.getRoomMessages()
+    .then((data) => {
+      successedGetMessage(data);
+    });
+}, 5000);
 
 function successedGetMessage(messages) {
   if (!hasMansionPoemCmd(messages)) {
